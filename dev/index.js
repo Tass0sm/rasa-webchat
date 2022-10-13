@@ -277,32 +277,13 @@ export default React.forwardRef((props, ref) => (
   <RasaWebchatProWithRules innerRef={ref} {...props} />
 ));
 
-export const selfMount = (props, element = null) => {
-  const load = () => {
-    if (element === null) {
-      const node = document.createElement("div");
-      node.setAttribute("id", "rasaWebchatPro");
-      document.body.appendChild(node);
-    }
-    const webchatPro = React.createElement(RasaWebchatProWithRules, props);
-    root.render(webchatPro);
-  };
-  if (document.readyState === "complete") {
-    load();
-  } else {
-    window.addEventListener("load", () => {
-      load();
-    });
-  }
-};
-
 root.render(
   <RasaWebchatProWithRules
     initPayload={"/get_started"}
     socketUrl={"http://localhost:5005"}
     socketPath={"/socket.io/"}
     customData={{ language: "en" }} // arbitrary custom data. Stay minimal as this will be added to the socket
-    title={"The SmartChef"}
+    title={"SmartChef"}
   />
 );
 
