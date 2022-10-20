@@ -9,6 +9,8 @@ import socket from "./socket";
 import ThemeContext from "../src/components/Widget/ThemeContext";
 // eslint-disable-next-line import/no-mutable-exports
 
+let store;
+
 const ConnectedWidget = forwardRef((props, ref) => {
   class Socket {
     constructor(
@@ -83,7 +85,7 @@ const ConnectedWidget = forwardRef((props, ref) => {
   }
 
   const instanceSocket = useRef({});
-  const store = useRef(null);
+  store = useRef(null);
 
   if (
     !instanceSocket.current.url &&
@@ -122,6 +124,7 @@ const ConnectedWidget = forwardRef((props, ref) => {
     store.current.socketRef = instanceSocket.current.marker;
     store.current.socket = instanceSocket.current;
   }
+
   return (
     <Provider store={store.current}>
       <ThemeContext.Provider
@@ -268,4 +271,4 @@ ConnectedWidget.defaultProps = {
   assistBackgoundColor: ""
 };
 
-export default ConnectedWidget;
+export { store, ConnectedWidget };

@@ -1,112 +1,114 @@
-import { store } from '../../index';
-import * as actions from './index';
+import { store } from "../../index";
+import * as actions from "./index";
 
 export function isOpen() {
-  return store.dispatch(actions.getOpenState());
+  return store.current.dispatch(actions.getOpenState());
 }
 
 export function isVisible() {
-  return store.dispatch(actions.getVisibleState());
+  return store.current.dispatch(actions.getVisibleState());
 }
 
 export function initialize() {
-  store.dispatch(actions.initialize());
+  store.current.dispatch(actions.initialize());
 }
 
 export function connect() {
-  store.dispatch(actions.connect());
+  store.current.dispatch(actions.connectServer());
 }
 
 export function disconnect() {
-  store.dispatch(actions.disconnect());
+  store.current.dispatch(actions.disconnectServer());
 }
 
 export function addUserMessage(text) {
-  store.dispatch(actions.addUserMessage(text));
+  console.log(store.current);
+
+  store.current.dispatch(actions.addUserMessage(text));
 }
 
 export function emitUserMessage(text) {
-  store.dispatch(actions.emitUserMessage(text));
+  store.current.dispatch(actions.emitUserMessage(text));
 }
 
 export function addResponseMessage(text) {
-  store.dispatch(actions.addResponseMessage(text));
+  store.current.dispatch(actions.addResponseMessage(text));
 }
 
 export function addCarousel(carousel) {
-  store.dispatch(actions.addCarousel(carousel));
+  store.current.dispatch(actions.addCarousel(carousel));
 }
 
 export function addVideoSnippet(video) {
-  store.dispatch(actions.addVideoSnippet(video));
+  store.current.dispatch(actions.addVideoSnippet(video));
 }
 
 export function addImageSnippet(image) {
-  store.dispatch(actions.addImageSnippet(image));
+  store.current.dispatch(actions.addImageSnippet(image));
 }
 
 export function addButtons(buttons) {
-  store.dispatch(actions.addButtons(buttons));
+  store.current.dispatch(actions.addButtons(buttons));
 }
 
 export function setButtons(id, title) {
-  store.dispatch(actions.setButtons(id, title));
+  store.current.dispatch(actions.setButtons(id, title));
 }
 
 export function insertUserMessage(id, text) {
-  store.dispatch(actions.insertUserMessage(id, text));
+  store.current.dispatch(actions.insertUserMessage(id, text));
 }
 
 export function renderCustomComponent(component, props, showAvatar = false) {
-  store.dispatch(actions.renderCustomComponent(component, props, showAvatar));
+  store.current.dispatch(actions.renderCustomComponent(component, props, showAvatar));
 }
 
 export function openChat() {
-  store.dispatch(actions.openChat());
+  store.current.dispatch(actions.openChat());
 }
 
 export function closeChat() {
-  store.dispatch(actions.closeChat());
+  store.current.dispatch(actions.closeChat());
 }
 
 export function toggleChat() {
-  store.dispatch(actions.toggleChat());
+  store.current.dispatch(actions.toggleChat());
 }
 
 export function showChat() {
-  store.dispatch(actions.showChat());
+  store.current.dispatch(actions.showChat());
 }
 
 export function hideChat() {
-  store.dispatch(actions.hideChat());
+  store.current.dispatch(actions.hideChat());
 }
 
 export function toggleFullScreen() {
-  store.dispatch(actions.toggleFullScreen());
+  store.current.dispatch(actions.toggleFullScreen());
 }
 
 export function toggleInputDisabled(disable) {
-  store.dispatch(actions.toggleInputDisabled(disable));
+  store.current.dispatch(actions.toggleInputDisabled(disable));
 }
 
 export function dropMessages() {
-  store.dispatch(actions.dropMessages());
+  store.current.dispatch(actions.dropMessages());
 }
 
 export function pullSession() {
-  store.dispatch(actions.pullSession());
+  store.current.dispatch(actions.pullSession());
 }
 
 export function newUnreadMessage() {
-  store.dispatch(actions.newUnreadMessage());
+  store.current.dispatch(actions.newUnreadMessage());
 }
 
-export function send(playload, text = '', customStore) {
+export function send(playload, text = "", customStore) {
   if (customStore) {
     customStore.dispatch(actions.emitUserMessage(playload));
-    if (text !== '') customStore.dispatch(actions.addUserMessage(text));
+    if (text !== "") customStore.dispatch(actions.addUserMessage(text));
     return;
   }
-  store.dispatch(actions.emitUserMessage(playload));
-  if (text !== '') store.dispatch(actions.addUserMessage(text));
+  store.current.dispatch(actions.emitUserMessage(playload));
+  if (text !== "") store.current.dispatch(actions.addUserMessage(text));
 }
